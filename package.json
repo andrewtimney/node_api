@@ -1,0 +1,14 @@
+{
+  "name": "nodeapi",
+  "version": "0.0.0",
+  "private": true,
+  "scripts": {
+    "start": ""
+  },
+  "dependencies": {
+    "passport": "^0.3.0",
+    "passport-http": "^0.3.0",
+    "passport-restify": "^1.0.0",
+    "restify": "^4.0.3"
+  }
+}
