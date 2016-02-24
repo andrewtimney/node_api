@@ -5,23 +5,20 @@ var BasicStrategy = require('passport-http').BasicStrategy;
 passport.use(new BasicStrategy(
   function (username, password, done) {
     if(username)
-      return done(null, { user: username });
-      
-    return done("Whoops");
+      return done(null, { username: username });
+
+    return done(null, false, {message: "Something went wrong"});
   }
 ));
 
-function respond(req, res, next) {
-  res.send({ hello: req.params.name });
-  next();
-}
-
 var server = restify.createServer();
 server.get(
-  '/hello/:name', 
+  '/hello',
   passport.authenticate('basic', { session: false }),
-  respond);
-server.head('/hello/:name', respond);
+  function (req, res, next) {
+    res.send({ "hello": req.user.username });
+    next();
+  });
 
 server.use(passport.initialize());
 
